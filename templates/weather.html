@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+Погода в городе {{ city }}
+{% endblock %}
+
+{% block content %}
+<div class="card border-dark">
+    <h5 class="card-header w-100">{{ city }}</h5>
+  <div class="card-body">
+         <h4 class="card-title">{{ weather.main }}</h4>
+          <img src="{{ weather.icon }}" alt="">
+    
+    <h6 class="card-subtitle mb-2 text-muted">{{ weather.description }}</h6>
+    <div class="alert alert-danger" role="alert">
+      Температура: {{ weather.temp.temp }} °C
+    </div>
+      <div class="alert alert-warning" role="alert">
+      Ощущается как: {{ weather.temp.feels_like }} °C
+    </div>
+      <div class="alert alert-success" role="alert">
+      Давление: {{ weather.pressure }} мм.рт.ст.
+    </div>
+      <div class="alert alert-primary" role="alert">
+      Влажность: {{ weather.humidity }}%
+    </div>
+  </div>
+</div>
+<h3 class="mt-5">Прогноз на 5 дней</h3>
+<div class="row">
+    {% for day in forecast %}
+    <div class="col-sm-4 mt-5">
+        <div class="card border-dark">
+    <h5 class="card-header w-100">{{ day }}</h5>
+  <div class="card-body">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            {% for time in forecast[day] %}
+          <li class="nav-item ml-1 mt-1" role="presentation">
+            <a class="nav-link {{ time.active }}" id="pills-home-tab" data-bs-toggle="pill" href="#weather{{ time.id }}"
+               role="tab"
+               aria-controls="weather{{ time.id }}" aria-selected="true">{{ time.time }}</a>
+          </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            {% for weather in forecast[day] %}
+          <div class="tab-pane fade show {{ weather.active }}" id="weather{{ weather.id }}" role="tabpanel"
+               aria-labelledby="pills-home-tab">
+              <h4 class="card-title">{{ weather.main }}</h4>
+          <img src="{{ weather.icon }}" alt="">
+
+    <h6 class="card-subtitle mb-2 text-muted">{{ weather.description }}</h6>
+    <div class="alert alert-danger" role="alert">
+      Температура: {{ weather.temp.temp }} °C
+    </div>
+      <div class="alert alert-warning" role="alert">
+      Ощущается как: {{ weather.temp.feels_like }} °C
+    </div>
+      <div class="alert alert-success" role="alert">
+      Давление: {{ weather.pressure }} мм.рт.ст.
+    </div>
+      <div class="alert alert-primary" role="alert">
+      Влажность: {{ weather.humidity }}%
+    </div>
+          </div>
+            {% endfor %}
+        </div>
+  </div>
+</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

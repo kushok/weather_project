@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+    <title>{% block title %}{% endblock %}</title>
+</head>
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-light p-4">
+          <h3><a href="/" class="nav-link text-dark">Открытая погода</a></h3>
+          <a class="nav-link text-dark" href="/towns">Погода в главных городах</a>
+          <form class="d-flex form-inline" action="/weather">
+            <input class="form-control me-2 mr-2" name="city" type="search" placeholder="Город" aria-label="Search"
+                   value="{{ city }}">
+            <button class="btn btn-outline-success" type="submit">Узнать погоду</button>
+          </form>
+      </nav>
+    </header>
+    <!-- Begin page content -->
+    <main role="main" class="container-fluid p-5">
+        {% block content %}{% endblock %}
+    </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  </body>
+</html>

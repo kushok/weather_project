@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+Погода в главных городах
+{% endblock %}
+
+{% block content %}
+<div class="row">
+{% for city in cities %}
+<div class="col-sm-3 p-1">
+    <div class="card border-dark">
+        <h5 class="card-header w-100">{{ city.name }}</h5>
+      <div class="card-body">
+             <h4 class="card-title">{{ city.weather.main }}</h4>
+              <img src="{{ city.weather.icon }}" alt="">
+
+        <h6 class="card-subtitle mb-2 text-muted">{{ city.weather.description }}</h6>
+        <div class="alert alert-danger" role="alert">
+          Температура: {{ city.weather.temp.temp }} °C
+        </div>
+          <div class="alert alert-warning" role="alert">
+          Ощущается как: {{ city.weather.temp.feels_like }} °C
+        </div>
+          <div class="alert alert-success" role="alert">
+          Давление: {{ city.weather.pressure }} мм.рт.ст.
+        </div>
+          <div class="alert alert-primary" role="alert">
+          Влажность: {{ city.weather.humidity }}%
+        </div>
+      </div>
+        <div class="card-footer"><a class="btn btn-primary" href="/weather?city={{ city.name }}">Подробнее</a></div>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
